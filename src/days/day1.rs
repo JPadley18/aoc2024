@@ -17,8 +17,9 @@ impl PuzzleSolver for Day1 {
                 Some(x) => smallest_right = x.0,
                 None => break,
             }
-            total +=
-                (left_list.get(smallest_left).unwrap() - right_list.get(smallest_right).unwrap()).abs();
+            total += (left_list.get(smallest_left).unwrap()
+                - right_list.get(smallest_right).unwrap())
+            .abs();
             left_list.remove(smallest_left);
             right_list.remove(smallest_right);
         }
