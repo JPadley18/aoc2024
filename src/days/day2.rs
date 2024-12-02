@@ -10,7 +10,7 @@ impl PuzzleSolver for Day2 {
 
     fn solve_part_2(&self, input: &str) -> String {
         let parsed_input = self.parse_input(input);
-        parsed_input.iter().filter(|x| self.force_input_is_safe_with_dampener(x)).count().to_string()
+        parsed_input.iter().filter(|x| self.input_is_safe_with_dampener(x)).count().to_string()
     }
 }
 
@@ -32,23 +32,6 @@ impl Day2 {
     }
 
     fn input_is_safe_with_dampener(&self, input: &Vec<i32>) -> bool {
-        match self.where_is_input_unsafe(input) {
-            None => return true,
-            Some(i) => {
-                let mut without_current = input.clone();
-                without_current.remove(i as usize);
-                if i > 0 {
-                    let mut without_last = input.clone();
-                    without_last.remove((i - 1) as usize);
-                    self.input_is_safe(&without_last) || self.input_is_safe(&without_current)
-                } else {
-                    self.input_is_safe(&without_current)
-                }
-            }
-        }
-    }
-
-    fn force_input_is_safe_with_dampener(&self, input: &Vec<i32>) -> bool {
         if self.input_is_safe(input) {
             return true
         }
