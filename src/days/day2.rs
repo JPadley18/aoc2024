@@ -32,17 +32,20 @@ impl Day2 {
     }
 
     fn input_is_safe_with_dampener(&self, input: &Vec<i32>) -> bool {
-        if self.input_is_safe(input) {
-            return true
-        }
-        for (i, _) in input.iter().enumerate() {
-            let mut removed = input.clone();
-            removed.remove(i);
-            if self.input_is_safe(&removed) {
-                return true
+        match self.where_is_input_unsafe(input) {
+            None => return true,
+            Some(i) => {
+                // Try removing each element from this one back until we find a working version
+                for j in (0..(i + 1)).rev() {
+                    let mut temp = input.clone();
+                    temp.remove(j as usize);
+                    if self.input_is_safe(&temp) {
+                        return true
+                    }
+                }
+                false
             }
         }
-        false
     }
 
     fn where_is_input_unsafe(&self, input: &Vec<i32>) -> Option<i32> {
