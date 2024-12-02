@@ -25,6 +25,13 @@ pub mod day8;
 pub mod day9;
 
 pub trait PuzzleSolver {
-    fn solve_part_1(&self, input: &str) -> String;
-    fn solve_part_2(&self, input: &str) -> String;
+    #[allow(unused)]
+    fn solve_part_1(&self, input: &str) -> String {
+        panic!("Not yet implemented")
+    }
+
+    #[allow(unused)]
+    fn solve_part_2(&self, input: &str) -> String {
+        panic!("Not yet implemented")
+    }
 }
