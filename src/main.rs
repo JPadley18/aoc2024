@@ -6,7 +6,7 @@ use days::{
     day22, day23, day24, day25, day3, day4, day5, day6, day7, day8, day9, PuzzleSolver,
 };
 use dotenv::dotenv;
-use std::env;
+use std::{env, time::Instant};
 
 fn main() {
     dotenv().expect("Failed to load .env");
@@ -39,12 +39,15 @@ fn main() {
 
     // Find a solver for this day
     let solver = map_solver(day).unwrap();
+    // Time the solution
+    let start = Instant::now();
     let solution: Option<String> = match part {
         1 => Some(solver.solve_part_1(&input)),
         2 => Some(solver.solve_part_2(&input)),
         _ => None,
     };
     println!("Day {} Part {}: {}", day, part, solution.unwrap());
+    println!("Took {:.2?}", start.elapsed());
 }
 
 fn map_solver(day: i32) -> Option<Box<dyn PuzzleSolver>> {
