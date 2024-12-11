@@ -7,8 +7,9 @@ impl PuzzleSolver for Day11 {
   fn solve_part_1(&self, input: &str) -> String {
     let stones: Vec<u64> = input.split_whitespace().map(|x| x.parse::<u64>().unwrap()).collect();
     let mut score = 0;
+    let mut memo_table: HashMap<(u64, usize), u64> = HashMap::new();
     for stone in stones {
-      score += Day11::permute_stone_times(stone, 25, &mut HashMap::new());
+      score += Day11::permute_stone_times(stone, 25, &mut memo_table);
     }
     score.to_string()
   }
@@ -16,8 +17,9 @@ impl PuzzleSolver for Day11 {
   fn solve_part_2(&self, input: &str) -> String {
     let stones: Vec<u64> = input.split_whitespace().map(|x| x.parse::<u64>().unwrap()).collect();
     let mut score = 0;
+    let mut memo_table: HashMap<(u64, usize), u64> = HashMap::new();
     for stone in stones {
-      score += Day11::permute_stone_times(stone, 75, &mut HashMap::new());
+      score += Day11::permute_stone_times(stone, 75, &mut memo_table);
     }
     score.to_string()
   }
